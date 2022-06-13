@@ -1,20 +1,18 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 const App = () => {
+  const [name, setName] = useState('');
 
-  // name - Nome da variavel
-  // setName - Nome da função que será usada para trocar o nome da variavel
-  // 'David' - valor padrão da variavel 
-  const [name, setName] = useState('David');
-
-  const handleButtomClick = () => {
-    setName("Augusto")
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
   }
 
   return (
     <div>
-      Meu nome é {name}.
-      <button onClick={handleButtomClick}>Clique Aqui</button>
+      Nome: 
+      <input type="text" value={name} onChange={handleInput}/>
+      <hr />
+      Seu nome é: {name}
     </div>
   );
 }
