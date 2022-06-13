@@ -1,14 +1,20 @@
-import { Header } from "./components/header";
-import { Photo } from './components/photo'
+import { useState } from 'react'
 
-function App() {
+const App = () => {
+
+  // name - Nome da variavel
+  // setName - Nome da função que será usada para trocar o nome da variavel
+  // 'David' - valor padrão da variavel 
+  const [name, setName] = useState('David');
+
+  const handleButtomClick = () => {
+    setName("Augusto")
+  }
+
   return (
     <div>
-      <Header title="planeta terra" />
-
-      <Photo legend="Google"> 
-        <img src="https://www.google.com.br/google.jpg" alt="" />
-      </Photo>
+      Meu nome é {name}.
+      <button onClick={handleButtomClick}>Clique Aqui</button>
     </div>
   );
 }
