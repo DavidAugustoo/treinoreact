@@ -6,12 +6,11 @@ import * as C from './AppStyles';
 const App = () => {
 
   return (
-    <div>
-      <C.Container>
-        <Button>Inscreva-se</Button>
+      <C.Container bgColor="green">
+        <Button bg="red">Inscreva-se</Button>
+        <Button bg="grey" small>Cancelar</Button>
         <C.Paragraph>Para se inscrever, clique no botão inscreva-se</C.Paragraph>
       </C.Container>
-    </div>
   );
 }
 
