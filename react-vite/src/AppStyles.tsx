@@ -19,8 +19,11 @@ export const Container = styled.div<ContainerProps>`
                 color: black;
             }
         }
+    }
 
 
+    @media (max-width: 600px) {
+        background-color: pink;
     }
 `;
 
