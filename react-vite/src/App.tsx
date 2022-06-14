@@ -1,16 +1,11 @@
 import { useState } from 'react';
+import { Button } from './components/Button'
 
 const App = () => {
 
-  const [clicked, setCliked] =  useState(false);
-
-  const handleClick = () => {
-    setCliked(!clicked);
-  }
-
   return (
     <div>
-      <button style={{backgroundColor: clicked == true ? 'red' : 'blue'}} onClick={handleClick}>Clique Aqui</button>
+      <Button />
     </div>
   );
 }
