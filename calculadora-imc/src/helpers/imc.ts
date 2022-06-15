@@ -8,7 +8,7 @@ export type Level = {
 
 export const levels: Level[] = [
     { title: 'Magreza', color: '#96a4ab', icon: 'down', imc: [0, 18.5] },
-    { title: 'Normal', color: '#0ead69', icon: 'up', imc: [18.6, 24.9] },
+    { title: 'Normal', color: '#0ead69', icon: 'up', imc: [18.6, 24.99] },
     { title: 'Sobrepeso', color: '#e2b036', icon: 'down', imc: [25, 30] },
     { title: 'Obesidade', color: '#c3423f', icon: 'down', imc: [30.1, 99] }
 ];
@@ -18,8 +18,10 @@ export const calculateImc = (height: number, weight:number) => {
 
     for(let i in levels) {
         if(imc >= levels[i].imc[0] && imc <= levels[i].imc[1]) {
-            levels[i].yourImc = imc;
-            return levels[i];
+            let levelCopy = {...levels[i]};
+
+            levelCopy.yourImc = parseFloat(imc.toFixed());
+            return levelCopy;
         }
     }
 

@@ -6,6 +6,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.main {
+    padding-bottom: 50px;
+}
+
 .headerContainer {
     max-width: 900px;
     margin: 40px auto;
@@ -44,6 +48,10 @@ body {
     outline: 0px;
 }
 
+.container .leftSide input:disabled {
+    opacity: .5;
+}
+
 .container .leftSide button {
     background-color: #227c9d;
     color: white;
@@ -61,8 +69,76 @@ body {
     opacity: .9;
 }
 
+.container .leftSide button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 
 .container .rightSide {
+    display: flex;
     flex: 1;
 }
 
+.container .rightSide .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.container .rightSide .rightBig {
+    flex: 1;
+    display: flex;
+}
+
+.rightArrow {
+    position: absolute;
+    background-color: #227c9d;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: -30px;
+    margin-top: 145px;
+    transition: all ease .3;
+}
+
+.rightArrow:hover {
+    opacity: .8;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 0px 20px;
+    }
+
+    .container {
+        padding: 0px 20px;
+        flex-direction: column;
+    }
+
+    .container .leftSide {
+        margin-right: 0px;
+    }
+
+    .container .rightSide {
+        margin-left: 0px;
+        margin-top: 30px;
+    }
+
+    .container .rightSide .rightArrow {
+        margin-left: 0px;
+        margin-top: 0px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 425px) {
+    .container .rightSide .grid {
+        grid-template-columns: 1fr;
+    }
+}
