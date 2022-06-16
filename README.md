@@ -1,3 +1,3 @@
 # treinoreact
 
-Repositório destinado aos estudos sobre react
+Repositório destinado aos estudos sobre **React**
