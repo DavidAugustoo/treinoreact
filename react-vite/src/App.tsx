@@ -4,14 +4,10 @@ import { Movie } from './types/Movie'
 const App = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
-  const loadMovies = () => {
-    fetch(`https://api.b7web.com.br/cinema/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        setMovies(json);
-      });
+  const loadMovies = async () => {
+    let response = await fetch(`https://api.b7web.com.br/cinema/`);
+    let json = await response.json();
+    setMovies(json);
   }
 
   useEffect(() => {
