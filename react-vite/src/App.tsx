@@ -1,14 +1,27 @@
-// Primeiro forma de criar componentes
-import { Button } from './components/Button'
-// Segunda forma de criar compnentes
-import * as C from './AppStyles';
+import { ChangeEvent, useEffect, useState } from "react";
 
 const App = () => {
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [fullName, setFullName] = useState('');
+
+  useEffect(() => {
+    setFullName(`${name} ${lastName}`);
+  }, [name, lastName]);
+      
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  }
+
+  const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLastName(e.target.value);
+  }
 
   return ( 
-    <div className="bg-indigo-700 text-white p-2 flex flex-col gap-4 items-center	">
-      <p className="text-center text-xl">Primeiros passos com Tailwind</p>
-      <button className="bg-cyan-500 hover:bg-cyan-600 px-2 py-1 rounded-lg text-sm w-full md:w-auto">Clique Aqui</button>
+    <div>
+      <input type="text" value={name} placeholder="Digite seu nome" onChange={handleNameChange}/>
+      <input type="text" value={lastName} placeholder="Digite seu sobrenome" onChange={handleLastNameChange}/>
+      <p>Nome completo: {fullName}</p>
     </div>
   );
 }
