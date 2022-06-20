@@ -6,11 +6,17 @@ const App = () => {
   const[loading, setLoading] = useState(false);
 
   const loadMovies = async () => {
-    setLoading(true);
-    let response = await fetch(`https://api.b7web.com.br/cinema/`);
-    let json = await response.json();
-    setLoading(false);
-    setMovies(json);
+    try {
+      setLoading(true);
+      let response = await fetch(`https://api.b7web.com.br/cinema/`);
+      let json = await response.json();
+      setLoading(false);
+      setMovies(json);
+    } catch(e) {
+      setLoading(false);
+      alert("Erro! Tente mais tarde");
+    }
+    
   }
 
   useEffect(() => {
