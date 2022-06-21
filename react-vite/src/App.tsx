@@ -2,18 +2,19 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { PostForm } from "./components/PostForm";
 import { Post } from './types/Movie';
 import { PostItem } from './components/PostItem';
+import { api } from './api';
 
 const App = () => {
   const [post, setPost] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const loadMovies = async () => {
+  const loadPosts = async () => {
     try {
       setLoading(true);
-      let response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-      let json = await response.json();
+      let json = await api.getAllPosts();
       setLoading(false);
       setPost(json);
+      
     } catch (e) {
       setLoading(false);
       alert("Erro! Tente mais tarde");
@@ -22,18 +23,13 @@ const App = () => {
   }
 
   useEffect(() => {
-    loadMovies();
+    loadPosts();
   }, [])
 
   const handleAddPost = async (title: string, body: string) => {
     if (title && body) {
-      let response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify({ body, title, userId: 1 }),
-        headers: { 'Content-Type': 'aplication/json' }
-      });
-      let json = await response.json();
-
+      let json = await api.addNewPost(title, body, 1);
+      
       if (json.id) {
         alert('Post Adicionado!');
       } else {
