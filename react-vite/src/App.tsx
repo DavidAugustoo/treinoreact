@@ -1,63 +1,40 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { PostForm } from "./components/PostForm";
-import { Post } from './types/Movie';
-import { PostItem } from './components/PostItem';
-import { api } from './api';
+import { useReducer } from "react";
+
+type reducerState = {
+  count: number;
+}
+
+type reducerAction = {
+  type: string;
+}
+const initialState = { count: 0 };
+const reducer = (state: reducerState, action: reducerAction ) => {
+  switch (action.type) {
+    case 'ADD':
+      return {...state, count: state.count + 1}
+    break; 
+    case 'DEL':
+      if(state.count > 0) {
+        return {...state, count: state.count - 1}
+      }
+    break;
+    case 'RESET':
+      return initialState
+    break;
+  }
+  return state;
+}
 
 const App = () => {
-  const [post, setPost] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const loadPosts = async () => {
-    try {
-      setLoading(true);
-      let json = await api.getAllPosts();
-      setLoading(false);
-      setPost(json);
-      
-    } catch (e) {
-      setLoading(false);
-      alert("Erro! Tente mais tarde");
-    }
-
-  }
-
-  useEffect(() => {
-    loadPosts();
-  }, [])
-
-  const handleAddPost = async (title: string, body: string) => {
-    if (title && body) {
-      let json = await api.addNewPost(title, body, 1);
-      
-      if (json.id) {
-        alert('Post Adicionado!');
-      } else {
-        alert('Preencha os dados!');
-      }
-    }
-  }
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div>
-
-      <PostForm onAdd={handleAddPost} />
-
-      {!loading &&
-        <div>
-          Total de filmes: {post.length}
-        </div>
-      }
-
-      {loading &&
-        <div>Carregando...</div>
-      }
-
-      <div className="flex flex-col gap-4 p-5">
-        {post.map((item, key) => {
-          return <PostItem data={item}/>
-        })}
-      </div>
+      Contagem: {state.count}
+      <hr />
+      <button onClick={() =>dispatch({type: 'ADD'})}>Adicionar</button>
+      <button onClick={() =>dispatch({type: 'DEL'})}>Deletar</button>
+      <button onClick={() =>dispatch({type: 'RESET'})}>Reseat</button>
     </div>
   );
 }
