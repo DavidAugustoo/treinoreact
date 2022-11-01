@@ -15,6 +15,7 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
 `
+
 export const NewTransactionButton = styled.button`
   height: 50px;
   border-radius: 0px;
@@ -25,7 +26,8 @@ export const NewTransactionButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s;
- 
+
   &:hover {
     background: ${(props) => props.theme['green-700']};
+  }
 `
